@@ -553,6 +553,7 @@ body {
     </button>
   </div>
   <button class="btn-primary" id="r-cta" style="margin-bottom:8px">맞춤 제품 자세히 보기 →</button>
+  <button class="btn-primary" id="r-precise" style="margin-bottom:8px;background:#1a4f8a" onclick="goToPrecise()">🔬 10분으로 더 정확히 알아보기 →</button>
   <button class="btn-outline" onclick="restart()">다시 테스트하기</button>
 </div>
 
@@ -810,6 +811,9 @@ function kakaoChannel(){
   alert('카카오 채널 추가: 카카오톡에서 "큐라리드"를 검색해 채널을 추가해주세요.\n\n(실제 채널 연동 시 Kakao SDK 코드로 교체하세요)');
 }
 function startSurvey(){q1idx=0;q1ans=[];q1score=0;renderQ1();show('scr-q1');}
+function goToPrecise(){
+  window.open("https://wholesomeweek.github.io/quraread-survey/precise.html","_blank");
+}
 function restart(){q1idx=0;q1ans=[];q1score=0;q2idx=0;q2ans=[];curResult=null;show('scr-start');}
 </script>
 </body>
