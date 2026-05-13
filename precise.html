@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>큐라리드 | 정밀 대사 유형 검사 (Full Form)</title>
+<meta name="description" content="T축(갑상선)·A축(부신) 30문항 5점 척도 — 8개 유형 정밀 판정. 큐라리드 INCE 알고리즘 Full Form">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --s:#1a4f8a;--s-l:#eaf2fb;--s-m:#2563a8;
+  --f:#9a3810;--f-l:#fdf0ea;--f-m:#c2571a;
+  --t:#1B4332;--t-l:#D8F3DC;--t-m:#2D6A4F;
+  --a:#7a3800;--a-l:#FFF3E0;--a-m:#c2571a;
+  --text:#1a1a1a;--text2:#555;--text3:#999;
+  --border:rgba(0,0,0,0.1);--bg:#fafaf8;--white:#fff;
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;justify-content:center;padding:0 0 80px}
+.app{width:100%;max-width:520px;padding:24px 20px;min-height:100vh}
+.screen{display:none;animation:fadeIn .3s ease}
+.screen.on{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* 브랜드 */
+.brand-logo{font-family:'Noto Serif KR',serif;font-size:12px;letter-spacing:.22em;color:var(--text3);text-align:center;margin-bottom:8px;text-transform:uppercase}
+.brand-title{font-family:'Noto Serif KR',serif;font-size:24px;font-weight:600;color:var(--text);text-align:center;line-height:1.35;margin-bottom:6px}
+.brand-badge{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;background:#EAF3DE;color:#1B4332;margin:0 auto 10px;display:block;text-align:center;width:fit-content;margin:0 auto 12px}
+.brand-sub{font-size:13px;color:var(--text2);line-height:1.7;text-align:center;margin-bottom:20px}
+
+/* 스탯 */
+.stats-row{display:flex;justify-content:center;gap:24px;margin-bottom:18px;padding:14px;background:var(--white);border-radius:var(--radius);border:1px solid var(--border)}
+.stat{text-align:center}
+.stat-n{font-family:'Noto Serif KR',serif;font-size:20px;font-weight:600;color:var(--text)}
+.stat-l{font-size:10px;color:var(--text3);margin-top:2px}
+
+/* 비교 카드 */
+.compare-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.cmp-card{padding:12px 14px;border-radius:10px;border:1px solid var(--border);background:var(--white)}
+.cmp-label{font-size:10px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;margin-bottom:5px}
+.cmp-label.simple{color:var(--s-m)}
+.cmp-label.full{color:var(--t-m)}
+.cmp-item{font-size:12px;color:var(--text2);line-height:1.6}
+
+/* 면책·버튼 */
+.disclaimer{font-size:11px;color:var(--text3);line-height:1.7;background:#f4f4f0;border-radius:8px;padding:12px 14px;margin-bottom:18px}
+.btn-primary{width:100%;padding:15px;border:none;border-radius:var(--radius);font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:opacity .2s,transform .1s;color:#fff}
+.btn-primary:hover{opacity:.88}
+.btn-primary:active{transform:scale(.98)}
+.btn-green{background:var(--t-m)}
+.btn-outline{width:100%;padding:12px;background:transparent;color:var(--text2);border:1px solid var(--border);border-radius:var(--radius);font-family:'Noto Sans KR',sans-serif;font-size:14px;cursor:pointer;margin-top:8px;transition:background .15s}
+.btn-outline:hover{background:#f0f0ec}
+.powered{font-size:10px;color:var(--text3);text-align:center;margin-top:10px;letter-spacing:.04em}
+
+/* 진행 */
+.step-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.step-label{font-size:11px;color:var(--text3);letter-spacing:.04em}
+.step-num{font-size:12px;font-weight:500;color:var(--text2)}
+.prog-wrap{height:2px;background:#e0dedd;border-radius:1px;margin-bottom:6px;overflow:hidden}
+.prog-fill{height:2px;border-radius:1px;transition:width .4s ease}
+.prog-t{background:var(--t-m)}
+.prog-a{background:var(--a-m)}
+.axis-badge{display:inline-block;font-size:10px;font-weight:500;padding:3px 10px;border-radius:20px;margin-bottom:12px;letter-spacing:.04em}
+.axis-badge.t{background:var(--t-l);color:var(--t)}
+.axis-badge.a{background:var(--a-l);color:var(--a-m)}
+
+/* 질문 */
+.q-wrap{margin-bottom:14px}
+.q-num{font-size:11px;color:var(--text3);margin-bottom:6px}
+.q-text{font-family:'Noto Serif KR',serif;font-size:16px;font-weight:600;color:var(--text);line-height:1.55;margin-bottom:16px}
+.q-hint{font-size:11px;color:var(--text3);margin-bottom:12px;font-style:italic}
+
+/* 5점 척도 */
+.likert-wrap{margin-bottom:8px}
+.likert-labels{display:flex;justify-content:space-between;margin-bottom:8px}
+.likert-lbl{font-size:10px;color:var(--text3);text-align:center;flex:1;line-height:1.3}
+.likert-lbl.first{text-align:left}
+.likert-lbl.last{text-align:right}
+.likert-btns{display:flex;gap:8px;justify-content:center}
+.lbtn{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--border);background:var(--white);font-size:15px;font-weight:500;color:var(--text2);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lbtn:hover{border-color:var(--text2);background:#f4f4f0}
+.lbtn.sel-t{border-color:var(--t-m);background:var(--t-l);color:var(--t)}
+.lbtn.sel-a{border-color:var(--a-m);background:var(--a-l);color:var(--a-m)}
+.lbtn-num{font-size:16px;font-weight:500}
+
+/* 네비 */
+.nav{display:flex;gap:8px;margin-top:12px}
+.btn-prev{padding:12px 18px;border:1px solid var(--border);border-radius:10px;background:transparent;font-family:'Noto Sans KR',sans-serif;font-size:13px;color:var(--text2);cursor:pointer;transition:background .15s;flex-shrink:0}
+.btn-prev:hover{background:#f0f0ec}
+.btn-next{flex:1;padding:13px;border:none;border-radius:10px;font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:500;color:#fff;cursor:pointer;transition:opacity .15s,transform .1s}
+.btn-next:hover{opacity:.88}
+.btn-next:active{transform:scale(.98)}
+.btn-next:disabled{opacity:.3;cursor:default;transform:none}
+.btn-next-t{background:var(--t-m)}
+.btn-next-a{background:var(--a-m)}
+
+/* 축 전환 화면 */
+.axis-switch{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px 20px;margin-bottom:16px;text-align:center}
+.switch-icon{font-size:28px;margin-bottom:10px}
+.switch-title{font-family:'Noto Serif KR',serif;font-size:18px;font-weight:600;color:var(--text);margin-bottom:6px}
+.switch-sub{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:16px}
+.score-preview{display:flex;gap:10px;justify-content:center;margin-bottom:14px}
+.score-chip{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500}
+.score-chip.t{background:var(--t-l);color:var(--t)}
+.score-chip.a{background:var(--a-l);color:var(--a-m)}
+
+/* 결과 */
+.result-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:14px}
+.r-head{padding:22px 20px;text-align:center}
+.r-series{display:inline-block;font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px;margin-bottom:8px;letter-spacing:.04em}
+.r-series.s{background:var(--s-l);color:var(--s)}
+.r-series.f{background:var(--f-l);color:var(--f)}
+.r-code{font-family:'Noto Serif KR',serif;font-size:34px;font-weight:600;color:var(--text);margin-bottom:3px}
+.r-name{font-family:'Noto Serif KR',serif;font-size:19px;font-weight:600;color:var(--text);margin-bottom:8px}
+.r-hook{font-size:13px;color:var(--text2);line-height:1.65;white-space:pre-line}
+.r-div{height:1px;background:var(--border)}
+.r-body{padding:16px 20px}
+.r-sec{font-size:10px;font-weight:500;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
+.r-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.r-tag{font-size:11px;padding:4px 9px;border-radius:8px;background:#f2f1ec;color:var(--text2)}
+.r-why{font-size:12.5px;color:var(--text2);line-height:1.75;margin-bottom:12px}
+.mineral-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.mchip{font-size:10px;padding:3px 8px;border-radius:6px}
+.mchip.s{background:var(--s-l);color:var(--s)}
+.mchip.f{background:var(--f-l);color:var(--f)}
+
+/* 정밀 점수 바 */
+.score-bars{padding:14px 20px;background:#f8f7f3;border-top:1px solid var(--border)}
+.score-bar-title{font-size:11px;font-weight:500;color:var(--text2);margin-bottom:10px}
+.bar-row{margin-bottom:8px}
+.bar-label-row{display:flex;justify-content:space-between;margin-bottom:3px}
+.bar-axis{font-size:11px;font-weight:500;color:var(--text2)}
+.bar-val{font-size:11px;color:var(--text3)}
+.bar-track{height:6px;background:#e0dedd;border-radius:3px;overflow:hidden}
+.bar-fill{height:6px;border-radius:3px;transition:width .6s ease}
+.bar-fill-t{background:var(--t-m)}
+.bar-fill-a{background:var(--a-m)}
+.bar-range{display:flex;justify-content:space-between;margin-top:2px}
+.bar-range span{font-size:9px;color:var(--text3)}
+
+.r-prod{display:flex;align-items:center;gap:12px;padding:12px 20px;background:#f8f7f3;border-top:1px solid var(--border)}
+.prod-badge{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:#fff;flex-shrink:0}
+.prod-badge.s{background:var(--s-m)}
+.prod-badge.f{background:var(--f-m)}
+.prod-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:1px}
+.prod-desc{font-size:11px;color:var(--text2)}
+.share-copy{padding:10px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--text3);line-height:1.5;font-style:italic}
+
+.share-row{display:flex;gap:7px;margin-bottom:8px}
+.share-btn{flex:1;padding:10px;border:1px solid var(--border);border-radius:9px;background:var(--white);font-family:'Noto Sans KR',sans-serif;font-size:12px;color:var(--text2);cursor:pointer;transition:background .15s}
+.share-btn:hover{background:#f0f0ec}
+.compare-note{font-size:11px;color:var(--text3);background:#f4f4f0;border-radius:8px;padding:10px 12px;margin-bottom:10px;line-height:1.6;border-left:3px solid var(--t-m)}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- 시작 화면 -->
+<div class="screen on" id="scr-start">
+  <div style="padding:28px 0 16px">
+    <div class="brand-logo">QURAREAD · 큐라리드</div>
+    <div class="brand-title">정밀 대사 유형 검사</div>
+    <div class="brand-badge">Full Form · 정밀판</div>
+    <div class="brand-sub">갑상선(T축)과 부신(A축)을 독립적으로 측정하여<br>8개 유형을 정밀하게 판정합니다</div>
+  </div>
+  <div class="compare-row">
+    <div class="cmp-card">
+      <div class="cmp-label simple">단순판 Short Form</div>
+      <div class="cmp-item">16문항 · A/B/C · 3분<br>유형 빠르게 파악</div>
+    </div>
+    <div class="cmp-card" style="border-color:var(--t-m);border-width:1.5px">
+      <div class="cmp-label full">정밀판 Full Form ✓</div>
+      <div class="cmp-item">30문항 · 5점 척도 · 10분<br>T·A축 정밀 점수 제공</div>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-n">30</div><div class="stat-l">문항</div></div>
+    <div class="stat"><div class="stat-n">2축</div><div class="stat-l">T축·A축</div></div>
+    <div class="stat"><div class="stat-n">10분</div><div class="stat-l">소요</div></div>
+    <div class="stat"><div class="stat-n">8</div><div class="stat-l">유형</div></div>
+  </div>
+  <div class="disclaimer">
+    <strong>5점 척도 응답 방법</strong><br>
+    1 = 전혀 아니다 &nbsp; 2 = 아닌 편이다 &nbsp; 3 = 보통이다<br>
+    4 = 그런 편이다 &nbsp; 5 = 매우 그렇다<br><br>
+    1부~15번(T축)은 갑상선 경향, 16번~30번(A축)은 부신·스트레스 경향을 측정합니다.<br>
+    본 검사는 의료 행위가 아니며 HTMA 연구 기반 참고 도구입니다.<br>
+    <span style="font-weight:500;color:var(--text2)">특허출원 10-2026-0067330 · INCE 알고리즘</span>
+  </div>
+  <button class="btn-primary btn-green" onclick="startSurvey()">T축 검사 시작하기</button>
+  <div class="powered">QURAREAD Full Form · Wholesome Week</div>
+</div>
+
+<!-- T축 설문 (1~15) -->
+<div class="screen" id="scr-t">
+  <div class="step-info">
+    <span class="step-label" id="t-label">T축 · 갑상선 경향</span>
+    <span class="step-num" id="t-num">1 / 15</span>
+  </div>
+  <div class="prog-wrap"><div class="prog-fill prog-t" id="prog-t" style="width:6%"></div></div>
+  <div class="q-wrap">
+    <div class="axis-badge t" id="t-badge">T축 — 갑상선 기능 경향</div>
+    <div class="q-num" id="t-qnum">Q1</div>
+    <div class="q-text" id="t-text"></div>
+    <div class="q-hint">평소 가장 자주 느끼는 상태로 응답해 주세요</div>
+    <div class="likert-wrap">
+      <div class="likert-labels">
+        <div class="likert-lbl first">전혀<br>아니다</div>
+        <div class="likert-lbl">아닌<br>편이다</div>
+        <div class="likert-lbl">보통<br>이다</div>
+        <div class="likert-lbl">그런<br>편이다</div>
+        <div class="likert-lbl last">매우<br>그렇다</div>
+      </div>
+      <div class="likert-btns" id="t-btns"></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn-prev" id="t-prev" onclick="tPrev()">← 이전</button>
+    <button class="btn-next btn-next-t" id="t-next" onclick="tNext()" disabled>다음 →</button>
+  </div>
+</div>
+
+<!-- 축 전환 화면 -->
+<div class="screen" id="scr-switch">
+  <div class="axis-switch">
+    <div class="switch-icon">⚡</div>
+    <div class="switch-title">T축 완료!</div>
+    <div class="switch-sub">갑상선 경향 15문항을 완료했습니다.<br>이제 부신·스트레스 반응(A축) 15문항을 시작합니다.</div>
+    <div class="score-preview">
+      <div class="score-chip t">T축: <span id="switch-tscore">—</span>점</div>
+      <div class="score-chip a">A축: 측정 중</div>
+    </div>
+    <div style="font-size:12px;color:var(--text3);margin-bottom:16px">T축 점수는 결과 화면에서 A축 점수와 함께 해석됩니다</div>
+  </div>
+  <button class="btn-primary btn-next-a" onclick="startA()">A축 검사 계속하기 →</button>
+</div>
+
+<!-- A축 설문 (16~30) -->
+<div class="screen" id="scr-a">
+  <div class="step-info">
+    <span class="step-label" id="a-label">A축 · 부신 경향</span>
+    <span class="step-num" id="a-num">16 / 30</span>
+  </div>
+  <div class="prog-wrap"><div class="prog-fill prog-a" id="prog-a" style="width:6%"></div></div>
+  <div class="q-wrap">
+    <div class="axis-badge a" id="a-badge">A축 — 부신·스트레스 반응 경향</div>
+    <div class="q-num" id="a-qnum">Q16</div>
+    <div class="q-text" id="a-text"></div>
+    <div class="q-hint">평소 가장 자주 느끼는 상태로 응답해 주세요</div>
+    <div class="likert-wrap">
+      <div class="likert-labels">
+        <div class="likert-lbl first">전혀<br>아니다</div>
+        <div class="likert-lbl">아닌<br>편이다</div>
+        <div class="likert-lbl">보통<br>이다</div>
+        <div class="likert-lbl">그런<br>편이다</div>
+        <div class="likert-lbl last">매우<br>그렇다</div>
+      </div>
+      <div class="likert-btns" id="a-btns"></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn-prev" id="a-prev" onclick="aPrev()">← 이전</button>
+    <button class="btn-next btn-next-a" id="a-next" onclick="aNext()" disabled>다음 →</button>
+  </div>
+</div>
+
+<!-- 결과 화면 -->
+<div class="screen" id="scr-result">
+  <div class="result-card">
+    <div class="r-head" id="r-head"></div>
+    <div class="r-div"></div>
+    <div class="r-body" id="r-body"></div>
+    <div class="score-bars" id="r-bars"></div>
+    <div class="r-prod" id="r-prod"></div>
+    <div class="share-copy" id="r-share"></div>
+  </div>
+  <div class="compare-note">
+    정밀판 결과는 HTMA(모발 미네랄 검사)의 Ca/K·Na/Mg 비율과 비교 검증할 수 있습니다.<br>
+    <strong style="color:var(--t-m)">HTMA 검사 연계 → RESET 12주 코호트 참여 안내 →</strong>
+  </div>
+  <div class="share-row">
+    <button class="share-btn" onclick="copyShare()">결과 복사</button>
+    <button class="share-btn" onclick="shareKakao()">카카오 공유</button>
+    <button class="share-btn" onclick="shareInsta()">인스타 공유</button>
+  </div>
+  <button class="btn-primary btn-green" style="margin-bottom:8px" onclick="alert('HTMA 검사 연계 페이지로 이동합니다.\n(실제 링크 연결 필요)')">HTMA 검사로 정밀 검증하기 →</button>
+  <button class="btn-outline" onclick="restart()">다시 검사하기</button>
+</div>
+
+</div>
+
+<script>
+// ── T축 15문항 (갑상선 기능 경향) ─────────────────────────────
+// S방향 = 갑상선 저하 경향 (점수 높을수록 S경향)
+// 홀수번호: S방향 문항 (점수 그대로 사용)
+// 짝수번호: F방향 문항 (점수 반전: 6-점수)
+var tData = [
+  // 1~5: 체온·에너지
+  {q:"손발이 차갑고 몸이 잘 식는 편이다",dir:"s"},
+  {q:"몸에 열이 많고 더위를 많이 타는 편이다",dir:"f"},
+  {q:"아침에 일어나기가 몹시 힘들고 시동이 걸리기까지 시간이 오래 걸린다",dir:"s"},
+  {q:"충분히 자도 아침에 개운하지 않고 피곤하다",dir:"s"},
+  {q:"하루 종일 몸이 무겁고 전반적으로 에너지가 낮다",dir:"s"},
+  // 6~10: 체중·순환
+  {q:"조금만 먹어도 살이 잘 찌고 다이어트를 해도 잘 빠지지 않는다",dir:"s"},
+  {q:"아침에 얼굴·손·발목이 붓는 경우가 많다",dir:"s"},
+  {q:"변비가 자주 있고 소화가 느린 편이다",dir:"s"},
+  {q:"관절이 뻣뻣하거나 몸이 무겁게 느껴지는 날이 많다",dir:"s"},
+  {q:"땀이 거의 나지 않는 편이다",dir:"s"},
+  // 11~15: 심리·인지
+  {q:"우울하거나 무기력하며 의욕이 없을 때가 많다",dir:"s"},
+  {q:"생각이 느리거나 기억력이 예전보다 떨어진 것 같다",dir:"s"},
+  {q:"달고 따뜻한 음식이나 탄수화물이 특히 당긴다",dir:"s"},
+  {q:"피부가 매우 건조하고 모발이 푸석해졌다",dir:"s"},
+  {q:"목 앞쪽이 답답하거나 목소리가 자주 쉬고 이물감이 느껴진다",dir:"s"},
+];
+
+// ── A축 15문항 (부신·스트레스 반응 경향) ──────────────────────
+// F방향 = 부신 과활성 경향 (점수 높을수록 F경향)
+var aData = [
+  // 16~20: 스트레스·신경
+  {q:"스트레스를 받으면 긴장되고 예민해지며 과활성화되는 편이다",dir:"f"},
+  {q:"작은 소리·빛·냄새 등 감각 자극에 강하게 반응하고 예민하다",dir:"f"},
+  {q:"불안하거나 두근거리는 경험이 자주 있다",dir:"f"},
+  {q:"잠들기가 어렵고 머릿속이 복잡하여 뒤척이는 편이다",dir:"f"},
+  {q:"긴장하면 손에 땀이 나거나 심장이 빠르게 뛴다",dir:"f"},
+  // 21~25: 에너지·소화
+  {q:"오전에는 에너지가 넘치다가 오후에 갑자기 방전되는 경험이 있다",dir:"f"},
+  {q:"카페인(커피·에너지음료)이 없으면 두통이 오거나 극도로 피곤하다",dir:"f"},
+  {q:"소화가 예민하고 스트레스를 받으면 바로 배가 아프거나 설사한다",dir:"f"},
+  {q:"식후 1~2시간 후 갑자기 졸리거나 집중이 뚝 떨어지는 경험이 있다",dir:"f"},
+  {q:"짜고 자극적인 음식이 당기거나 식사 시 소금·간장을 추가하는 편이다",dir:"f"},
+  // 26~30: 번아웃·회복
+  {q:"한동안 매우 활발했는데 갑자기 의욕이 바닥나거나 꺼진 느낌이 든다",dir:"f"},
+  {q:"땀을 많이 흘리거나 더위를 많이 타는 편이다",dir:"f"},
+  {q:"평소 혈압이 높은 편이거나 두근거림·가슴 답답함을 자주 느낀다",dir:"f"},
+  {q:"요즘 감정 기복이 심해지고 예전과 달라진 것 같다",dir:"f"},
+  {q:"스트레스 상황이 지나가도 신경이 계속 곤두서 있고 진정이 잘 안 된다",dir:"f"},
+];
+
+// ── 유형 판정 매트릭스 ────────────────────────────────────────
+// T-score: 15~75 (높을수록 갑상선 저하 = S경향)
+// A-score: 15~75 (높을수록 부신 과활성 = F경향)
+// 기준선: 45 (중립)
+
+var RESULTS = {
+  S1:{ser:"s",code:"S1형",name:"예열형",
+    hook:'"아침마다 몸이 천천히 깨어나는 당신"\n시동이 걸리기까지 시간이 필요한 예열형',
+    tags:["손발 냉감","만성 피로","체중 증가","새벽 자주 깸","부교감 우세"],
+    why:"갑상선과 부신이 동시에 저하된 가장 전형적인 느린 대사 상태입니다. T축·A축 모두 중립 이하로, 세포 수준에서 에너지 생산 속도가 느리고 체온 유지와 대사 전환이 어렵습니다.",
+    minerals:["Ca↑ K↓","갑상선 저하","부신 저하"],
+    prod:"진정샷",prodDesc:"철분·셀레늄·안동 생강·호박 — 대사 점화를 돕는 성분",
+    share:'"나는 S1형 예열형 — 천천히 깨어나는 게 내 리듬이었어요. 큐라리드 정밀판으로 읽었습니다."'},
+  S2:{ser:"s",code:"S2형",name:"방전형",
+    hook:'"피곤한데 왜 가끔 불안하고 두근거릴까요?"\n쉬어도 회복이 안 되는 복합 패턴',
+    tags:["만성 피로","간헐적 두근거림","무기력+불안 혼재","아침 기상 어려움"],
+    why:"T축이 낮고 A축이 중간인 불안정한 패턴입니다. 갑상선 저하가 주를 이루지만 부신이 간헐적으로 보상 반응을 일으켜 무기력과 불안이 섞여 나타납니다.",
+    minerals:["Ca↑ K↓","갑상선 저하","Na/Mg 불안정"],
+    prod:"진정샷",prodDesc:"마그네슘·철분·셀레늄 — 신경계 안정과 대사 점화 동시 지원",
+    share:'"나는 S2형 방전형 — 쉬어도 안 채워지던 이유, 이제 알았어요. 큐라리드 정밀판."'},
+  S3:{ser:"s",code:"S3형",name:"저장형",
+    hook:'"몸이 뭔가를 붙잡고 있는 느낌"\n흘려보내지 못하고 머금는 저장형',
+    tags:["아침 부종","관절 뻣뻣함","변비 경향","체중 정체","순환 저하"],
+    why:"T축이 매우 높고 A축이 낮은 패턴입니다. 갑상선 저하에 칼슘 과잉 축적이 더해져 조직 내 순환과 배출이 방해되는 상태입니다.",
+    minerals:["Ca↑↑ K↓","갑상선 저하","칼슘 과잉"],
+    prod:"진정샷",prodDesc:"칼륨·셀레늄·호박씨 — 칼슘 균형 회복과 순환 지원",
+    share:'"나는 S3형 저장형 — 몸이 붙잡고 있던 이유가 있었어요. 큐라리드 정밀판으로 읽었습니다."'},
+  S4:{ser:"s",code:"S4형",name:"잔열형",
+    hook:'"겉은 꺼진 것 같지만 아직 온기가 남아 있어요"\n꺼진 듯 보이지만 속에 잔열이 남은 당신',
+    tags:["극도 무기력","감정 무감각","집중력 저하","회복 불가","HPA 탈진"],
+    why:"T축과 A축 모두 최저 수준인 번아웃 전환 패턴입니다. 원래 빠른 대사(F형)였다가 장기 스트레스로 느린 대사로 전환된 상태로, 에너지 시스템 전체가 탈진 상태입니다.",
+    minerals:["Ca↑ K↓","부신 고갈","HPA 탈진"],
+    prod:"진정샷",prodDesc:"철분·마그네슘·안동 생강 — 소진된 에너지 시스템 재점화",
+    share:'"나는 S4형 잔열형 — 꺼진 게 아니었어요. 안에 온기가 남아 있었어요. 큐라리드 정밀판."'},
+  F1:{ser:"f",code:"F1형",name:"점화형",
+    hook:'"항상 켜져 있고 금방 점화되는 당신"\n에너지가 먼저 붙는 몸, 쉽게 꺼지지 않는 엔진',
+    tags:["잠들기 어려움","불안·두근거림","과도한 발한","교감신경 우세"],
+    why:"T축과 A축 모두 높은 전형적인 빠른 대사 상태입니다. Na/Mg 비율이 높아 교감신경이 쉬지 않고 작동하며, Ca/K 비율이 낮아 흥분 제동이 어렵습니다.",
+    minerals:["Ca↓ K↑","Na↑ Mg↓","갑상선·부신 과활성"],
+    prod:"순환샷",prodDesc:"마그네슘·칼슘·문경 오미자·베리류 — 과활성 회로 안정화",
+    share:'"나는 F1형 점화형 — 항상 켜져 있던 이유를 알았어요. 큐라리드 정밀판으로 읽었습니다."'},
+  F2:{ser:"f",code:"F2형",name:"스파크형",
+    hook:'"오전엔 스파크가 튀는데 오후엔 꺼져버려요"\n순간 점화는 강렬하지만 빠르게 소모되는 스파크형',
+    tags:["오전 과활성","오후 급방전","카페인 의존","혈당 불안정"],
+    why:"A축이 높고 T축이 중간인 번아웃 진입 단계입니다. 코르티솔이 오전에 급격히 소진되어 오후가 되면 에너지가 갑자기 떨어집니다.",
+    minerals:["Na↑ Mg↓↓","부신 저하 시작","코르티솔 불안정"],
+    prod:"순환샷",prodDesc:"마그네슘·아연·오미자 — 코르티솔 리듬 회복과 혈당 안정화",
+    share:'"나는 F2형 스파크형 — 오후에 꺼지던 이유가 있었어요. 큐라리드 정밀판으로 읽었습니다."'},
+  F3:{ser:"f",code:"F3형",name:"안테나형",
+    hook:'"작은 신호도 먼저 감지하는 당신"\n섬세하게 받아들이는 안테나형, 민감함은 능력입니다',
+    tags:["스트레스성 소화 불량","감각 예민","심계항진","HPA-장 축 불안정"],
+    why:"A축이 매우 높고 T축이 중간인 패턴입니다. HPA 축과 장-뇌 축이 동시에 흔들리면서 작은 자극에도 강하게 반응하고 스트레스가 즉각 신체 증상으로 이어집니다.",
+    minerals:["Ca↓ K↑","갑상선 항진","Mg↓"],
+    prod:"순환샷",prodDesc:"마그네슘·칼슘·매실·베리 — 신경-장 연결 안정화 지원",
+    share:'"나는 F3형 안테나형 — 내가 다 감지하는 이유가 있었어요. 큐라리드 정밀판."'},
+  F4:{ser:"f",code:"F4형",name:"과몰입형",
+    hook:'"나 완전 과몰입형…"\n열심히 하다 어느 순간 의욕과 탈진이 함께 오는 당신',
+    tags:["과몰입 후 탈진","의욕 고갈","감정 기복 심화","피로+불안 혼재"],
+    why:"T축과 A축 모두 극도로 높거나 경계에 있는 탈진 직전 패턴입니다. 피로와 불안이 동시에 오며, 의욕은 떨어졌지만 멈추지도 못하는 역설적 상태입니다. 지금이 가장 중요한 회복 시점입니다.",
+    minerals:["Ca↓ K↑","Na↑ Mg↓↓","갑상선·부신 동시 탈진"],
+    prod:"순환샷",prodDesc:"마그네슘·칼슘·오미자·유자 — 탈진 경계에서 회복 지원",
+    share:'"나는 F4형 과몰입형 — 너무 열심히 산 나에게 필요한 것을 큐라리드 정밀판이 읽어줬어요."'},
+};
+
+// ── 상태 변수 ────────────────────────────────────────────────
+var tidx=0, tans=new Array(15).fill(null);
+var aidx=0, aans=new Array(15).fill(null);
+var tScore=0, aScore=0;
+var curResult=null;
+
+function el(id){return document.getElementById(id);}
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  el(id).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── 리커트 버튼 렌더링 ───────────────────────────────────────
+function renderLikert(container, selVal, axis){
+  container.innerHTML='';
+  [1,2,3,4,5].forEach(function(n){
+    var btn=document.createElement('button');
+    var cls='lbtn';
+    if(selVal===n) cls+=' sel-'+axis;
+    btn.className=cls;
+    btn.innerHTML='<span class="lbtn-num">'+n+'</span>';
+    btn.onclick=function(){
+      container.querySelectorAll('.lbtn').forEach(b=>{
+        b.className='lbtn';
+      });
+      btn.className='lbtn sel-'+axis;
+      return n;
+    };
+    container.appendChild(btn);
+    return btn;
+  });
+}
+
+// ── T축 렌더링 ───────────────────────────────────────────────
+function renderT(){
+  var d=tData[tidx];
+  el('t-text').textContent=d.q;
+  el('t-num').textContent=(tidx+1)+' / 15';
+  el('t-qnum').textContent='Q'+(tidx+1);
+  el('prog-t').style.width=((tidx+1)/15*100)+'%';
+  var btns=el('t-btns');
+  btns.innerHTML='';
+  var selVal=tans[tidx];
+  [1,2,3,4,5].forEach(function(n){
+    var btn=document.createElement('button');
+    btn.className='lbtn'+(selVal===n?' sel-t':'');
+    btn.innerHTML='<span class="lbtn-num">'+n+'</span>';
+    btn.onclick=function(){
+      btns.querySelectorAll('.lbtn').forEach(b=>b.className='lbtn');
+      btn.className='lbtn sel-t';
+      tans[tidx]=n;
+      el('t-next').disabled=false;
+    };
+    btns.appendChild(btn);
+  });
+  el('t-next').disabled=tans[tidx]===null;
+  el('t-prev').style.visibility=tidx===0?'hidden':'visible';
+  el('t-next').textContent=tidx<14?'다음 →':'A축으로 넘어가기 →';
+}
+
+function tNext(){
+  if(tans[tidx]===null) return;
+  if(tidx<14){tidx++;renderT();}
+  else{
+    calcTScore();
+    el('switch-tscore').textContent=tScore;
+    show('scr-switch');
+  }
+}
+function tPrev(){if(tidx>0){tidx--;renderT();}}
+
+function calcTScore(){
+  tScore=0;
+  tData.forEach(function(d,i){
+    if(tans[i]===null) return;
+    // S방향 문항: 점수 그대로 (높을수록 S경향)
+    // F방향 문항: 반전 (높을수록 F경향 → S점수 낮음)
+    if(d.dir==='s') tScore+=tans[i];
+    else tScore+=(6-tans[i]);
+  });
+}
+
+// ── A축 시작 ─────────────────────────────────────────────────
+function startA(){aidx=0;renderA();show('scr-a');}
+
+function renderA(){
+  var d=aData[aidx];
+  el('a-text').textContent=d.q;
+  el('a-num').textContent=(aidx+16)+' / 30';
+  el('a-qnum').textContent='Q'+(aidx+16);
+  el('prog-a').style.width=((aidx+1)/15*100)+'%';
+  var btns=el('a-btns');
+  btns.innerHTML='';
+  var selVal=aans[aidx];
+  [1,2,3,4,5].forEach(function(n){
+    var btn=document.createElement('button');
+    btn.className='lbtn'+(selVal===n?' sel-a':'');
+    btn.innerHTML='<span class="lbtn-num">'+n+'</span>';
+    btn.onclick=function(){
+      btns.querySelectorAll('.lbtn').forEach(b=>b.className='lbtn');
+      btn.className='lbtn sel-a';
+      aans[aidx]=n;
+      el('a-next').disabled=false;
+    };
+    btns.appendChild(btn);
+  });
+  el('a-next').disabled=aans[aidx]===null;
+  el('a-prev').style.visibility=aidx===0?'hidden':'visible';
+  el('a-next').textContent=aidx<14?'다음 →':'최종 결과 확인 →';
+}
+
+function aNext(){
+  if(aans[aidx]===null) return;
+  if(aidx<14){aidx++;renderA();}
+  else{calcResult();show('scr-result');}
+}
+function aPrev(){if(aidx>0){aidx--;renderA();}else show('scr-switch');}
+
+// ── 결과 판정 ────────────────────────────────────────────────
+function calcResult(){
+  // A축 점수 계산 (높을수록 F경향)
+  aScore=0;
+  aData.forEach(function(d,i){
+    if(aans[i]===null) return;
+    // A축은 모두 F방향 문항 → 점수 그대로
+    aScore+=aans[i];
+  });
+
+  // 판정 기준
+  // T: 45 기준, 높을수록 S경향 (갑상선 저하)
+  // A: 45 기준, 높을수록 F경향 (부신 과활성)
+  var T=tScore, A=aScore;
+  // Tie-break: 정중앙(45점) 처리 — ★ 가중치 문항(T01,T03,T05) 방향으로 미세 조정
+  if(T===45){
+    var tAdj=0;
+    [0,2,4].forEach(function(i){ // T01,T03,T05
+      if(tans[i]!==null) tAdj+=(tData[i].dir==='s'?tans[i]:(6-tans[i]));
+    });
+    T=tAdj>=9?46:44; // 9점(평균3점)이상이면 S경향으로 미세 이동
+  }
+  if(A===45){
+    var aAdj=0;
+    [0,1,2].forEach(function(i){ // A01,A02,A03
+      if(aans[i]!==null) aAdj+=aans[i];
+    });
+    A=aAdj>=9?46:44;
+  }
+  var tLow=(T>=51), tMid=(T>=39&&T<51), tHigh=(T<39);   // tLow = S강, tHigh = F강
+  var aLow=(A<39),  aMid=(A>=39&&A<51), aHigh=(A>=51);  // aLow = 부신저하, aHigh = F강
+
+  var type='';
+  if(T>=54 && A<=36) type='S3';       // T매우높음 + A낮음: 저장형
+  else if(T>=51 && A<=30) type='S4';  // T높음 + A매우낮음: 잔열형 (번아웃)
+  else if(T>=45 && A<=45) type='S1';  // T높음(S경향) + A낮음: 예열형
+  else if(T>=45 && aMid)  type='S2';  // T높음 + A중간: 방전형
+  else if(tHigh && aHigh) type='F1';  // T낮음(F경향) + A높음: 점화형
+  else if(tMid  && aHigh) type='F3';  // T중간 + A높음: 안테나형
+  else if(tHigh && aMid)  type='F2';  // T낮음 + A중간: 스파크형
+  else if(T<=33 && A>=57) type='F4';  // 양쪽 극단: 과몰입형
+  else if(T<45)           type='F1';  // F경향 일반
+  else                    type='S1';  // 기본
+
+  curResult=RESULTS[type];
+  renderResult(curResult, T, A);
+}
+
+function renderResult(r, T, A){
+  var s=r.ser;
+  var head=el('r-head');
+  head.style.background=s==='s'?'#f0f7ff':'#fff5f0';
+  head.innerHTML=
+    '<div class="r-series '+s+'">'+(s==='s'?'느린 에너지 리듬 · S계열':'빠른 에너지 리듬 · F계열')+'</div>'+
+    '<div class="r-code">'+r.code+'</div>'+
+    '<div class="r-name">'+r.name+'</div>'+
+    '<div class="r-hook">'+r.hook+'</div>';
+
+  var tagsH=r.tags.map(t=>'<span class="r-tag">'+t+'</span>').join('');
+  var minH=r.minerals.map(m=>'<span class="mchip '+s+'">'+m+'</span>').join('');
+  el('r-body').innerHTML=
+    '<div class="r-sec">주요 증상 패턴</div><div class="r-tags">'+tagsH+'</div>'+
+    '<div class="r-sec">왜 이런 에너지 리듬인가</div><div class="r-why">'+r.why+'</div>'+
+    '<div class="r-sec">HTMA 미네랄 패턴 예측</div><div class="mineral-row">'+minH+'</div>';
+
+  // 점수 바
+  var tPct=Math.round((T-15)/60*100);
+  var aPct=Math.round((A-15)/60*100);
+  var tLabel=T>=54?'갑상선 저하 강함':T>=45?'갑상선 저하 경향':T>=39?'중립':T>=30?'갑상선 활성 경향':'갑상선 활성 강함';
+  var aLabel=A>=54?'부신 과활성 강함':A>=45?'부신 과활성 경향':A>=39?'중립':A>=30?'부신 저하 경향':'부신 저하 강함';
+  // 2D 매트릭스 좌표 계산 (0~100% 범위로 정규화)
+  var dotX=Math.round((A-15)/60*100); // A축=가로(낮음=왼쪽/F저하, 높음=오른쪽/F과활성)
+  var dotY=Math.round((1-(T-15)/60)*100); // T축=세로(낮음=아래/F경향, 높음=위/S경향)
+  dotX=Math.min(Math.max(dotX,5),95);
+  dotY=Math.min(Math.max(dotY,5),95);
+  el('r-bars').innerHTML=
+    '<div class="score-bar-title">정밀 측정 결과 — T·A 2축 매트릭스</div>'+
+    '<div style="display:grid;grid-template-columns:28px 1fr;gap:4px;margin-bottom:10px">'+
+      '<div style="display:flex;align-items:center;justify-content:center"><span style="font-size:9px;color:var(--text3);writing-mode:vertical-rl;transform:rotate(180deg)">T축(갑상선) ↑S경향</span></div>'+
+      '<div style="position:relative;width:100%;padding-bottom:56%;background:linear-gradient(135deg,#eaf2fb 0%,#f0fbf4 40%,#fdf0ea 70%,#fff3e0 100%);border-radius:8px;border:1px solid var(--border);overflow:hidden">'+
+        '<div style="position:absolute;inset:0">'+
+          // 사분면 구분선
+          '<div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(0,0,0,0.08)"></div>'+
+          '<div style="position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(0,0,0,0.08)"></div>'+
+          // 사분면 레이블
+          '<span style="position:absolute;top:6px;left:6px;font-size:9px;color:#1a4f8a;font-weight:500">느린+부신저하<br>S형(예열·잔열)</span>'+
+          '<span style="position:absolute;top:6px;right:6px;font-size:9px;color:#6a2200;font-weight:500;text-align:right">느린+과활성<br>S형(방전·저장)</span>'+
+          '<span style="position:absolute;bottom:6px;left:6px;font-size:9px;color:#2563a8;font-weight:500">빠른+부신저하<br>F형(스파크)</span>'+
+          '<span style="position:absolute;bottom:6px;right:6px;font-size:9px;color:#9a3810;font-weight:500;text-align:right">빠른+과활성<br>F형(점화·과몰입)</span>'+
+          // 내 점수 도트
+          '<div style="position:absolute;left:'+dotX+'%;top:'+dotY+'%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:#1B4332;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.3);z-index:2"></div>'+
+          '<div style="position:absolute;left:'+dotX+'%;top:'+dotY+'%;transform:translate(-50%,-200%);background:#1B4332;color:#fff;font-size:10px;padding:2px 6px;border-radius:10px;white-space:nowrap;z-index:3">내 위치</div>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+    '<div style="text-align:center;font-size:10px;color:var(--text3);margin-bottom:10px">← A축(부신) 부신저하 &nbsp;&nbsp; | &nbsp;&nbsp; 부신과활성 →</div>'+
+    '<div class="bar-row">'+
+      '<div class="bar-label-row"><span class="bar-axis">T축 (갑상선)</span><span class="bar-val">'+T+'점 · '+tLabel+'</span></div>'+
+      '<div class="bar-track"><div class="bar-fill bar-fill-t" style="width:'+tPct+'%"></div></div>'+
+      '<div class="bar-range"><span>15 (F경향)</span><span>45 (중립)</span><span>75 (S경향)</span></div>'+
+    '</div>'+
+    '<div class="bar-row">'+
+      '<div class="bar-label-row"><span class="bar-axis">A축 (부신)</span><span class="bar-val">'+A+'점 · '+aLabel+'</span></div>'+
+      '<div class="bar-track"><div class="bar-fill bar-fill-a" style="width:'+aPct+'%"></div></div>'+
+      '<div class="bar-range"><span>15 (부신저하)</span><span>45 (중립)</span><span>75 (과활성)</span></div>'+
+    '</div>';
+
+  el('r-prod').innerHTML=
+    '<div class="prod-badge '+s+'">'+r.prod+'</div>'+
+    '<div><div class="prod-name">큐라 리드 '+r.prod+'</div><div class="prod-desc">'+r.prodDesc+'</div></div>';
+  el('r-share').textContent=r.share;
+}
+
+function copyShare(){
+  if(curResult){
+    navigator.clipboard&&navigator.clipboard.writeText(
+      curResult.share+' T축:'+tScore+'점 / A축:'+aScore+'점'
+    ).then(()=>alert('복사되었습니다!'));
+  }
+}
+function shareKakao(){
+  if(curResult&&navigator.share){
+    navigator.share({title:'큐라리드 정밀판 결과',text:curResult.share,url:window.location.href});
+  } else alert('카카오 공유: '+( curResult?curResult.share:''));
+}
+function shareInsta(){
+  if(curResult){
+    navigator.clipboard&&navigator.clipboard.writeText(curResult.share)
+      .then(()=>alert('인스타 공유 문구가 복사되었습니다!'));
+  }
+}
+function startSurvey(){tidx=0;tans.fill(null);aidx=0;aans.fill(null);tScore=0;aScore=0;renderT();show('scr-t');}
+function restart(){show('scr-start');}
+</script>
+</body>
+</html>
