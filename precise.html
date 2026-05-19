@@ -179,7 +179,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
       <div class="cmp-item">30문항 · 5점 척도 · 4분<br>T·A축 정밀 점수 제공</div>
     </div>
   </div>
-  <!-- ① 소요시간 10분 → 4분으로 수정 -->
+  <!-- ① 소요시간 10분 → 7분으로 수정 -->
   <div class="stats-row">
     <div class="stat"><div class="stat-n">30</div><div class="stat-l">문항</div></div>
     <div class="stat"><div class="stat-n">2축</div><div class="stat-l">T축·A축</div></div>
@@ -538,6 +538,7 @@ function calcResult(){
 
   curResult=RESULTS[type];
   renderResult(curResult, T, A);
+  submitResult(curResult, T, A);
 }
 
 function renderResult(r, T, A){
@@ -645,6 +646,81 @@ function shareInsta(){
 }
 function startSurvey(){tidx=0;tans.fill(null);aidx=0;aans.fill(null);tScore=0;aScore=0;renderT();show('scr-t');}
 function restart(){show('scr-start');}
+
+// ── 데이터 수집 ───────────────────────────────────────────────
+// ★ Apps Script 웹앱 URL을 배포 후 아래에 붙여넣으세요
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxYMOtgRMwpejkdjYpS20mKMQrtJEVO9X25kanR1TYXnCbap44PT1mho1ZIqxoVQX0seA/exec';
+
+function generateToken(){
+  var chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var t='';
+  for(var i=0;i<16;i++) t+=chars.charAt(Math.floor(Math.random()*chars.length));
+  return t;
+}
+
+function getDeviceInfo(){
+  var ua=navigator.userAgent;
+  var browser='Unknown';
+  var device='Unknown';
+  if(/Kakaotalk/i.test(ua)) browser='Kakaotalk';
+  else if(/Edg/i.test(ua)) browser='Edge';
+  else if(/Chrome/i.test(ua)) browser='Chrome';
+  else if(/Safari/i.test(ua)) browser='Safari';
+  else if(/Firefox/i.test(ua)) browser='Firefox';
+  if(/iPhone/i.test(ua)) device='iPhone';
+  else if(/Android/i.test(ua)&&/Mobile/i.test(ua)) device='Android Smartphone';
+  else if(/Android/i.test(ua)) device='Android Tablet';
+  else if(/iPad/i.test(ua)) device='iPad';
+  else device='Windows PC';
+  return {browser:browser, device:device};
+}
+
+function getReferrer(){
+  var ref=document.referrer;
+  if(!ref||ref==='') return 'Direct';
+  if(/kakao/i.test(ref)) return 'Kakao';
+  if(/instagram/i.test(ref)) return 'Instagram';
+  if(/naver/i.test(ref)) return 'Naver';
+  if(/google/i.test(ref)) return 'Google';
+  return ref;
+}
+
+function getURLParam(key){
+  var params=new URLSearchParams(window.location.search);
+  return params.get(key)||'';
+}
+
+function submitResult(r, T, A){
+  if(!APPS_SCRIPT_URL||APPS_SCRIPT_URL==='YOUR_APPS_SCRIPT_URL') return;
+  var di=getDeviceInfo();
+  var now=new Date();
+  var submittedAt=now.getFullYear()+'. '+(now.getMonth()+1)+'. '+now.getDate()+' '
+    +['오전','오후'][now.getHours()>=12?1:0]+' '
+    +(now.getHours()>12?now.getHours()-12:now.getHours()||12)+':'
+    +String(now.getMinutes()).padStart(2,'0')+':'
+    +String(now.getSeconds()).padStart(2,'0');
+  var payload={
+    submittedAt: submittedAt,
+    ending: r.code+' '+r.name,           // e.g. "F1형 점화형"
+    tScore: T,
+    aScore: A,
+    series: r.ser==='s'?'S계열(느린)':'F계열(빠른)',
+    product: '큐라 리드 '+r.prod,
+    source: getURLParam('source')||getURLParam('utm_source'),
+    campaign: getURLParam('campaign')||getURLParam('utm_campaign'),
+    referrer: getReferrer(),
+    browser: di.browser,
+    device: di.device,
+    token: generateToken(),
+    sheetName: '정밀판'
+  };
+  fetch(APPS_SCRIPT_URL, {
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(payload)
+  }).catch(function(){});
+}
 </script>
 </body>
 </html>
